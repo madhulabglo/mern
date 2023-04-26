@@ -5,7 +5,7 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-const LoginDatas = require("../models/LoginModael")
+const LoginDatas = require("../backend/models/LoginModael")
 
 
 const app = express()
@@ -27,17 +27,17 @@ mongoose.connect(DB).then(()=>{
     console.log("connection failed")
 })
 
-if (process.env.NODE_ENV === "production") {
-    const path = require("path");
-    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
-            if(err) {
-                res.status(500).send(err)
-            }
-        });
-    })
-}
+// if (process.env.NODE_ENV === "production") {
+//     const path = require("path");
+//     app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+//     app.get("*", (req, res) => {
+//         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
+//             if(err) {
+//                 res.status(500).send(err)
+//             }
+//         });
+//     })
+// }
 
 app.get("/",(req,res)=>{
     res.send("server Running")
